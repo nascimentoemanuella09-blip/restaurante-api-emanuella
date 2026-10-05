@@ -11,6 +11,9 @@ const bcrypt = require("bcrypt")
 const app = express()
 const PORT = 3001
 
+console.log("🔥 SERVER.JS FOI CARREGADO")
+
+
 app.use(express.json())
 app.use(cors())
 
@@ -62,6 +65,7 @@ app.post("/login", async (req,res)=>{
         )
 
         res.json({
+            mensagem:"Login realizado",
             token
         })
 
@@ -77,7 +81,7 @@ app.post("/register",async(req,res)=>{
 
     console.log("CHEGOU NO REGISTER")
     console.log(req.body)
-    
+
     try{
         const {nome, email, senha} = req.body
 
@@ -193,6 +197,14 @@ app.delete("/produtos/:id", async(req, res)=>{
     }
 })
 
-app.listen(PORT, ()=>{
-    console.log("Servidor rodando na porta 3001")
+app.use((req, res, next) => {
+    console.log("📥 REQUISIÇÃO:", req.method, req.url)
+    next()
 })
+
+app.listen(PORT, ()=>{
+    console.log("Servidor rodando na porta ")
+})
+
+console.log("🔥 FINAL DO ARQUIVO SERVER.JS")
+
